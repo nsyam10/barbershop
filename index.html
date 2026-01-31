@@ -366,17 +366,17 @@
         transform: translateY(-20px) scale(1.03);
         box-shadow: 0 40px 120px rgba(212,163,115,0.25);
     }
-    .gallery-item img, 
+    .gallery-item img,
     .gallery-item video {
-        position: absolute; 
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        height: 100%;
-        object-fit: cover; 
-        object-position: center;
-        transition: transform 0.6s ease, filter 0.3s ease;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
     }
+
+
     .gallery-item:hover img { 
         transform: scale(1.1); 
         filter: brightness(1.1) contrast(1.1); 
@@ -444,60 +444,56 @@
     }
 
     /* MODAL */
-    .modal {
-        display: none; 
-        position: fixed; 
-        z-index: 10000; 
-        left: 0; 
-        top: 0;
-        width: 100%; 
-        height: 100%; 
-        background: rgba(0,0,0,0.98);
-        animation: fadeIn 0.4s ease;
-        align-items: center;
-        justify-content: center;
-    }
-    .modal-content {
-        position: relative; 
-        margin: auto; 
-        max-width: 95vw; 
-        max-height: 95vh;
-        top: 50%; 
-        transform: translateY(-50%); 
-        border-radius: 25px;
-        overflow: hidden; 
-        box-shadow: 0 50px 150px rgba(0,0,0,0.9);
-    }
-    .modal img, 
-    .modal video { 
-        width: 100%; 
-        height: auto; 
-        max-height: 85vh; 
-        object-fit: contain; 
-        display: block; 
-    }
-    .close-modal {
-        position: absolute; 
-        top: 25px; 
-        right: 35px; 
-        color: white; 
-        font-size: 3rem;
-        font-weight: 700; 
-        cursor: pointer; 
-        z-index: 10001; 
-        width: 60px; 
-        height: 60px;
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        border-radius: 50%;
-        background: rgba(212,163,115,0.3); 
-        transition: all 0.3s ease;
-    }
-    .close-modal:hover { 
-        background: var(--gradient-gold); 
-        transform: scale(1.1) rotate(90deg); 
-    }
+    .modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.95);
+    z-index:99999;
+    align-items:center;
+    justify-content:center;
+}
+
+/* CLOSE BUTTON */
+.close-modal{
+    position:absolute;
+    top:20px;
+    right:25px;
+    font-size:2.5rem;
+    color:#fff;
+    cursor:pointer;
+    z-index:100000;
+    user-select:none;
+}
+
+/* MODAL CONTENT */
+.modal-content{
+    background:#000;
+    max-width:95vw;
+    max-height:90vh;
+    border-radius:18px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* IMAGE */
+.modal-content img{
+    width:100%;
+    height:auto;
+    max-height:90vh;
+    object-fit:contain;
+    display:block;
+}
+
+/* VIDEO */
+.modal-content video{
+    width:100%;
+    height:auto;
+    max-height:90vh;
+    display:block;
+}
     @keyframes fadeIn { 
         from { opacity: 0; } 
         to { opacity: 1; } 
@@ -746,68 +742,127 @@
     </section>
 
     <!-- PORTFOLIO -->
-    <section id="gallery" class="section gallery">
-        <h2 class="section-title">PORTFOLIO</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item" data-modal="modal1">
-                <img src="model1.png" alt="Perfect Fade" loading="lazy">
-                <div class="gallery-overlay">
-                    <div class="play-button"><i class="fas fa-expand"></i></div>
-                    <div class="gallery-title">PERFECT FADE</div>
-                </div>
-            </div>
-            <div class="gallery-item" data-modal="modal2">
-                <video loop muted preload="metadata"
-            >
-                    <source src="model1.mp4" type="video/mp4">
-                </video>
-                <div class="gallery-overlay">
-                    <div class="play-button"><i class="fas fa-play"></i></div>
-                    <div class="gallery-title">FADE PROCESS</div>
-                </div>
-            </div>
-            <div class="gallery-item" data-modal="modal3">
-                <img src="model2.png" alt="Beard Lineup" loading="lazy">
-                <div class="gallery-overlay">
-                    <div class="play-button"><i class="fas fa-expand"></i></div>
-                    <div class="gallery-title">BEARD LINEUP</div>
-                </div>
-            </div>
-            <div class="gallery-item" data-modal="modal4">
-                <video loop muted preload="metadata">
-                    <source src="model2.mp4" type="video/mp4">
-                </video>
-                <div class="gallery-overlay">
-                    <div class="play-button"><i class="fas fa-play"></i></div>
-                    <div class="gallery-title">BEARD MASTER</div>
-                </div>
-            </div>
-            <div class="gallery-item" data-modal="modal5">
-                <img src="model3.png" alt="Classic Cut" loading="lazy">
-                <div class="gallery-overlay">
-                    <div class="play-button"><i class="fas fa-expand"></i></div>
-                    <div class="gallery-title">CLASSIC CUT</div>
-                </div>
-            </div>
-            <div class="gallery-item" data-modal="modal6">
-                <video loop preload="metadata" >
-                    <source src="model3.mp4" type="video/mp4">
-                </video>
-                <div class="gallery-overlay">
-                    <div class="play-button"><i class="fas fa-play"></i></div>
-                    <div class="gallery-title">FULL PROCESS</div>
-                </div>
+<section id="gallery" class="section gallery">
+    <h2 class="section-title">PORTFOLIO</h2>
+
+    <div class="gallery-grid">
+
+        <!-- ITEM 1 -->
+        <div class="gallery-item" data-modal="modal1">
+            <img src="model1.png" alt="Perfect Fade"
+                 onerror="this.src='https://picsum.photos/600/600?1'">
+            <div class="gallery-overlay">
+                <div class="play-button"><i class="fas fa-expand"></i></div>
+                <div class="gallery-title">PERFECT FADE</div>
             </div>
         </div>
-    </section>
+
+        <!-- ITEM 2 VIDEO -->
+        <div class="gallery-item" data-modal="modal2">
+            <video autoplay muted loop playsinline poster="model1.png">
+                <source src="model1.mp4" type="video/mp4">
+            </video>
+            <div class="gallery-overlay">
+                <div class="play-button"><i class="fas fa-play"></i></div>
+                <div class="gallery-title">FADE PROCESS</div>
+            </div>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="gallery-item" data-modal="modal3">
+            <img src="model2.png" alt="Beard Lineup"
+                 onerror="this.src='https://picsum.photos/600/600?2'">
+            <div class="gallery-overlay">
+                <div class="play-button"><i class="fas fa-expand"></i></div>
+                <div class="gallery-title">BEARD LINEUP</div>
+            </div>
+        </div>
+
+        <!-- ITEM 4 VIDEO -->
+        <div class="gallery-item" data-modal="modal4">
+            <video autoplay muted loop playsinline poster="model2.png">
+                <source src="model2.mp4" type="video/mp4">
+            </video>
+            <div class="gallery-overlay">
+                <div class="play-button"><i class="fas fa-play"></i></div>
+                <div class="gallery-title">BEARD MASTER</div>
+            </div>
+        </div>
+
+        <!-- ITEM 5 -->
+        <div class="gallery-item" data-modal="modal5">
+            <img src="model3.png" alt="Classic Cut"
+                 onerror="this.src='https://picsum.photos/600/600?3'">
+            <div class="gallery-overlay">
+                <div class="play-button"><i class="fas fa-expand"></i></div>
+                <div class="gallery-title">CLASSIC CUT</div>
+            </div>
+        </div>
+
+        <!-- ITEM 6 VIDEO -->
+        <div class="gallery-item" data-modal="modal6">
+            <video autoplay muted loop playsinline poster="model3.png">
+                <source src="model3.mp4" type="video/mp4">
+            </video>
+            <div class="gallery-overlay">
+                <div class="play-button"><i class="fas fa-play"></i></div>
+                <div class="gallery-title">FULL PROCESS</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
 
     <!-- MODALS -->
-    <div id="modal1" class="modal"><span class="close-modal">&times;</span><div class="modal-content"><img src="model1.jpeg" alt="Perfect Fade"></div></div>
-    <div id="modal2" class="modal"><span class="close-modal">&times;</span><div class="modal-content"><video loop controls><source src="model1.mp4" type="video/mp4"></video></div></div>
-    <div id="modal3" class="modal"><span class="close-modal">&times;</span><div class="modal-content"><img src="model2.jpeg" alt="Beard Lineup"></div></div>
-    <div id="modal4" class="modal"><span class="close-modal">&times;</span><div class="modal-content"><video loop controls><source src="model2.mp4" type="video/mp4"></video></div></div>
-    <div id="modal5" class="modal"><span class="close-modal">&times;</span><div class="modal-content"><img src="model3.jpeg" alt="Classic Cut"></div></div>
-    <div id="modal6" class="modal"><span class="close-modal">&times;</span><div class="modal-content"><video loop controls><source src="model3.mp4" type="video/mp4"></video></div></div>
+    <div id="modal1" class="modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <img src="model1.png">
+    </div>
+</div>
+
+<div id="modal2" class="modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <video controls>
+            <source src="model1.mp4">
+        </video>
+    </div>
+</div>
+
+<div id="modal3" class="modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <img src="model2.png">
+    </div>
+</div>
+
+<div id="modal4" class="modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <video controls>
+            <source src="model2.mp4">
+        </video>
+    </div>
+</div>
+
+<div id="modal5" class="modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <img src="model3.png">
+    </div>
+</div>
+
+<div id="modal6" class="modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+        <video controls>
+            <source src="model3.mp4">
+        </video>
+    </div>
+</div>
+
 
     <!-- BOOKING -->
     <section id="booking" class="section booking">
@@ -889,14 +944,15 @@
         background: #fff;
     ">
         <iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.9981304629!2d106.947875!3d-6.189331!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698b4c8c8b4fcb%3A0x123456789abcdef!2sAgla%20Barbershop!5e0!3m2!1sid!2sid!4v1700000000000"
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.9981304629!2d106.947875!3d-6.189331!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698b4c8c8b4fcb!2sJakarta!5e0!3m2!1sid!2sid!4v1700000000000"
   width="100%"
   height="380"
   style="border:0;"
-  allowfullscreen=""
+  allowfullscreen
   loading="lazy"
   referrerpolicy="no-referrer-when-downgrade">
 </iframe>
+
 
     </div>
 
@@ -944,19 +1000,23 @@
         document.getElementById('mobileMenu').addEventListener('click', () => document.getElementById('mobileNav').classList.toggle('active'));
         document.querySelectorAll('.nav-links-mobile').forEach(link => link.addEventListener('click', () => document.getElementById('mobileNav').classList.remove('active')));
 
-        // PORTFOLIO MODAL + AUDIO
-        document.querySelectorAll('.gallery-item').forEach((item, index) => {
-            item.addEventListener('click', function() {
-                const modalId = `modal${index + 1}`;
-                const modal = document.getElementById(modalId);
-                modal.style.display = 'flex';
-                const video = modal.querySelector('video');
-                if (video) {
-                    video.muted = false;
-                    video.play().catch(e => console.log('Autoplay blocked'));
-                }
-            });
-        });
+        // OPEN MODAL
+document.querySelectorAll('.gallery-item').forEach(item=>{
+    item.addEventListener('click',()=>{
+        const modal=document.getElementById(item.dataset.modal);
+        if(!modal) return;
+
+        modal.style.display='flex';
+
+        const video=modal.querySelector('video');
+        if(video){
+            video.currentTime=0;
+            video.muted=false;
+            video.play().catch(()=>{});
+        }
+    });
+});
+
 
         // === JAM VALIDASI REAL-TIME ===
 function updateTimeOptions() {
@@ -995,20 +1055,44 @@ function updateTimeOptions() {
 }
 
 
-        // CLOSE MODAL
-        document.querySelectorAll('.close-modal, .modal').forEach(element => {
-            element.addEventListener('click', function(e) {
-                if (e.target.classList.contains('close-modal') || e.target.classList.contains('modal')) {
-                    const modal = this.closest('.modal');
-                    const video = modal.querySelector('video');
-                    if (video) { video.pause(); video.currentTime = 0; video.muted = true; }
-                    modal.style.display = 'none';
-                }
-            });
-        });
+        // STOP CLICK DI DALAM KONTEN
+document.querySelectorAll('.modal-content').forEach(el=>{
+    el.addEventListener('click',e=>e.stopPropagation());
+});
 
-        // ESC KEY
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal').forEach(modal => { modal.style.display = 'none'; const video = modal.querySelector('video'); if (video) { video.pause(); video.muted = true; } }); });
+// STOP CLICK DI TOMBOL CLOSE
+document.querySelectorAll('.close-modal').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+        e.stopPropagation();
+        const modal=btn.closest('.modal');
+        closeModal(modal);
+    });
+});
+
+// CLICK BACKGROUND = CLOSE
+document.querySelectorAll('.modal').forEach(modal=>{
+    modal.addEventListener('click',()=>{
+        closeModal(modal);
+    });
+});
+
+// ESC KEY CLOSE
+document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){
+        document.querySelectorAll('.modal').forEach(m=>closeModal(m));
+    }
+});
+
+// FUNCTION CLOSE
+function closeModal(modal){
+    const video=modal.querySelector('video');
+    if(video){
+        video.pause();
+        video.currentTime=0;
+        video.muted=true;
+    }
+    modal.style.display='none';
+}
 
         // BOOKING FORM
         const formInputs = ['customerName', 'phoneNumber', 'appointmentDate', 'appointmentTime', 'serviceType', 'notes'];
